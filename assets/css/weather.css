@@ -1,0 +1,44 @@
+/* media info */
+ /* Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) {
+    body {
+        background-color: ivory
+    };
+ }
+
+/* // Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+    body {
+        background-color: ivory
+    };
+}
+
+/* // Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+    body {
+        background-color: ivory
+    };
+}
+
+/* // Extra large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
+    body {
+        background-color: ivory
+    };
+}
+
+h1 {
+   text-align: center;
+}
+
+span {
+    display: inline-block;
+}
+
+.border-3 {
+    border-width: 3px;
+    border-style: solid;
+    border-color: blue;
+    box-shadow: 5px 5px;
+}
+
