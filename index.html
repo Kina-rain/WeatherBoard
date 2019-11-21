@@ -21,7 +21,7 @@
 <body>
 
     <div class="alert alert-primary pb-5 text-center" role="alert" id="topHeader">
-        <h1>Weather Check</h1>
+        <h1>Weather Board</h1>
         <h6>Enter your city or zip to retrieve your weather information</h6>
         <h6>Searches will be saved under the city and zip inputs</h6>
     </div>
@@ -46,22 +46,23 @@
                             </div>
                     </div>
                     <div class="row">
-                        <label for="searchHistory" id="searchHistory"></label>
+                        <table class="table" id="tabHistory">
+                            <tbody></tbody>
+                        </table>
                     </div>
                 </span>
             </div>
-            <div class="col-lg-8">
+            <div class="col-lg-10">
                 <div class="row pb-4">
-                    <div class="col-lg-8 col-lg-offset-1">
-                        <span class="border-3 pl-1">
+                    <div class="col-lg-8">
+                        <span class="border-3 p-3">
                             <h2>City: <span id="city"></span></h2>
                             <h2>Main Weather: <span id="main_weather"></span></h2>
                             <h2>Description: <span id="description_weather"></span></h2>
                             <img id="weather_image" src="">
                             <h2>Temperature: <span id="temperature"></span></h2>
                             <button id="convertToCelsius" class="btn btn-primary btn-sm">Convert to Celsius</button>
-                            <button id="convertToFahrenheit" class="btn btn-primary btn-sm">Convert to
-                                FahrenHeit</button>
+                            <button id="convertToFahrenheit" class="btn btn-primary btn-sm">Convert to FahrenHeit</button>
                             <h2>Pressure: <span id="pressure"></span></h2>
                             <h2>Humidity: <span id="humidity"></span></h2>
                             <h2>Wind Speed: <span id="windspd"></span></h2>
@@ -70,19 +71,13 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-lg-12 d-none" id="weatherWidgetArea"></div>
-                        <a class="weatherwidget-io" href="https://forecast7.com/en/40d71n74d01/baltimore/?unit=us"
-                            data-label_1="Baltimore" data-label_2="Forecast" data-days="5" data-theme="original" id="weatherWidgetTag">Local
-                            Weather
-                        </a>
-                    </div>
+                    
                 </div>
             </div>
         </div>
     </div>
 
     <script src="./assets/js/weather.js"></script>
-    <script src="./assets/js/anime.js"></script>
 </body>
 
 </html>

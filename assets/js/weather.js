@@ -1,45 +1,75 @@
+
 $(document).ready(function () {
 
-   // Optional Code for temperature conversion
-    var fahrenheit = true;
+    // tutorialzine.com for geolocation
+    navigator.geolocation.getCurrentPosition(locationSuccess, locationError);
 
+    //conver temp to C
     $("#convertToCelsius").click(function () {
-        if (fahrenheit) {
-            $("#temperature").text(((($("#temperature").text() - 32) * (5 / 9))));
-        }
-        fahrenheit = false;
+        let temp = parseFloat($("#temperature").text());
+
+        temp = ((temp - 32) * (5 / 9));
+
+        $("#temperature").text(temp.toFixed(2));
     });
 
+    //convert the temp to F
     $("#convertToFahrenheit").click(function () {
-        if (fahrenheit == false) {
-            $("#temperature").text((($("#temperature").text() * (9 / 5)) + 32));
-        }
-        fahrenheit = true;
+        let temp = parseFloat($("#temperature").text());
+
+        temp = (temp * (9/5)) + 32; 
+
+        $("#temperature").text(temp.toFixed(2));
     });
 
     $("#citybtn").click(function() {
-        getWeather($("#citySearch").val(), false);
+        getWeather($("#citySearch").val(), "", "");
     });
 
     $("#zipbtn").click(function() {
-        getWeather($("#zipSearch").val(), true);
+        getWeather("", $("#zipSearch").val(), "");
     });
 });
 
+// save browsing History to weather search
+// stackoverflow.com for add table/ row
+function searchHistoryAdd(searchLocation) {
+    var aTag = `<a href="#" onclick="getWeather('${searchLocation}', '', '')">${searchLocation}</a>`;
 
-//  search engine for city or zip
-function getWeather(location, zipSearch) {
+    $("#tabHistory > tbody:first-child").prepend("<tr><td>" + aTag + "</td></tr>");
+}
+
+// tutorialzine.com for weather forecast
+function locationSuccess(position) {
+
+    var lat = position.coords.latitude;
+    var long = position.coords.longitude;
+    var latLong = [lat, long];
+
+    getWeather("", "", latLong);
+}
+
+function locationError(error) {
+    console.log(error);
+}
+
+//  search engine for city, zip and latitude & longitude
+function getWeather(city, zip, latLong) {
     var long, lat;
-    var appID = "";
+    var appID = "572971abd208ea8591c8c5db68a237cd";
     var weatherURL;
 
-    if (!zipSearch) {
+    if (city != "") {
         // add ajax query for city search and set lat and long var from ajax response
         // Performing GET requests to the openweather API and logging the responses to the console
-        weatherURL = "https://api.openweathermap.org/data/2.5/weather?q=" + location + ",us&units=imperial&APPID=" + appID
-    } else {
+        weatherURL = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=imperial&APPID=" + appID
+    } else if (zip != "") {
         // add ajax query for zip search and set lat and long var from ajax response
-       weatherURL = "https://api.openweathermap.org/data/2.5/weather?zip=" + location + ",us&units=imperial&APPID=" + appID
+       weatherURL = "https://api.openweathermap.org/data/2.5/weather?zip=" + zip + "&units=imperial&APPID=" + appID
+    } else {
+        lat = latLong[0];
+        long = latLong[1];
+        weatherURL = "https://api.openweathermap.org/data/2.5/weather?lat=" + lat + "&lon=" + long + "&units=imperial&APPID=" + appID
     }
 
     console.log(weatherURL);
@@ -58,11 +88,12 @@ function getWeather(location, zipSearch) {
         lat = json.coord.lat;
 
         getUVindex(long, lat, appID);
+        searchHistoryAdd(json.name);
     });
 }
 
 function getUVindex(long, lat) {
-    var appID = "";
+    var appID = "d0002c08f39abfdc3b22ec60f51c0b4e";
     // add ajax query for UV index from api.openuv.io code found on OpenUV API key auth.
     var UVindexURl = "https://api.openuv.io/api/v1/uv?lat=" + lat + "&lng=" + long;
 
