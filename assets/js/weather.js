@@ -87,7 +87,7 @@ function locationError(error) {
 //  search engine for city, zip and latitude & longitude
 function getWeather(city, zip, latLong) {
     var long, lat;
-    var appID = "";
+    var appID = "572971abd208ea8591c8c5db68a237cd";
     var weatherURL;
 
     if (city != "") {
@@ -115,18 +115,18 @@ function getWeather(city, zip, latLong) {
         $("#windspd").html(json.wind.speed);
                 
         /* This was to get the UV Index but was unable to keep API key working */
-        //long = json.coord.lon;
-        //lat = json.coord.lat;
-        //getUVindex(long, lat, appID);
+        long = json.coord.lon;
+        lat = json.coord.lat;
+        getUVindex(long, lat, appID);
 
         //add our city to the search history list
         searchHistoryAdd(json.name, true);
     });
 }
 
-        // UV index from openUV.io however could Not keep functioning key code.
+// UV index from openUV.io
 function getUVindex(long, lat) {
-    var appID = "";
+    var appID = "d0002c08f39abfdc3b22ec60f51c0b4e";
     // add ajax query for UV index from api.openuv.io code found on OpenUV API key auth.
     var UVindexURl = "https://api.openuv.io/api/v1/uv?lat=" + lat + "&lng=" + long;
 
