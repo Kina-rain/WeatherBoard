@@ -2,39 +2,40 @@
  /* Small devices (landscape phones, 576px and up) */
 @media (min-width: 576px) {
     body {
-        background-color: ivory
+        background-color: skyblue;
+        background-image: url("../images/spring.png");
     };
  }
 
 /* // Medium devices (tablets, 768px and up) */
 @media (min-width: 768px) {
     body {
-        background-color: ivory
+        background-color: skyblue;
+        background-image: url("../images/spring.png");
     };
 }
 
 /* // Large devices (desktops, 992px and up) */
 @media (min-width: 992px) {
     body {
-        background-color: ivory
+        background-color: skyblue;
+        background-image: url("../images/spring.png");
     };
 }
 
 /* // Extra large devices (large desktops, 1200px and up) */
 @media (min-width: 1200px) {
     body {
-        background-color: ivory
-    };
-}
-
-h1 {
-   text-align: center;
+        background-color: skyblue;
+        background-image: url("../images/spring.png");
+       };
 }
 
 span {
     display: inline-block;
 }
 
+/* this will give border and shadow to the spans around the content areas */
 .border-3 {
     border-width: 3px;
     border-style: solid;

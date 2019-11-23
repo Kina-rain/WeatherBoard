@@ -1,8 +1,11 @@
 
 $(document).ready(function () {
 
-    // tutorialzine.com for geolocation
+    // tutorialzine.com for geolocation and calling load function for Search History
     navigator.geolocation.getCurrentPosition(locationSuccess, locationError);
+    
+    //load any saved locations from local storage
+    loadLocations();
 
     //conver temp to C
     $("#convertToCelsius").click(function () {
@@ -22,6 +25,7 @@ $(document).ready(function () {
         $("#temperature").text(temp.toFixed(2));
     });
 
+    // city and zip function button
     $("#citybtn").click(function() {
         getWeather($("#citySearch").val(), "", "");
     });
@@ -31,15 +35,41 @@ $(document).ready(function () {
     });
 });
 
-// save browsing History to weather search
-// stackoverflow.com for add table/ row
-function searchHistoryAdd(searchLocation) {
+// saves browsing History from weather search stackoverflow.com for add table/ row
+function searchHistoryAdd(searchLocation, storeData) {
     var aTag = `<a href="#" onclick="getWeather('${searchLocation}', '', '')">${searchLocation}</a>`;
 
     $("#tabHistory > tbody:first-child").prepend("<tr><td>" + aTag + "</td></tr>");
+    
+    if (storeData) {storeLocations(searchLocation);}
 }
 
-// tutorialzine.com for weather forecast
+// stores weather searches in local storage and pulls them back out
+function storeLocations(searchLocation) {
+
+    if (localStorage.getItem("locationData") === null) {
+        var weatherData = {
+            "location": [searchLocation]
+        };
+        localStorage.setItem("locationData", JSON.stringify(weatherData));
+    } else {
+        var weatherData = JSON.parse(localStorage.getItem("locationData"));
+        weatherData.location.push(searchLocation);
+
+        localStorage.setItem("locationData", JSON.stringify(weatherData));
+    }
+}
+
+//  Pulls data out of storage 
+function loadLocations() {
+    var weatherData = JSON.parse(localStorage.getItem("locationData"));
+
+    weatherData.location.forEach(weatherLocation => {
+        searchHistoryAdd(weatherLocation, false)        
+    });
+}
+
+// tutorialzine.com for weather forecast, works with geolocation call
 function locationSuccess(position) {
 
     var lat = position.coords.latitude;
@@ -53,18 +83,17 @@ function locationError(error) {
     console.log(error);
 }
 
+
 //  search engine for city, zip and latitude & longitude
 function getWeather(city, zip, latLong) {
     var long, lat;
-    var appID = "572971abd208ea8591c8c5db68a237cd";
+    var appID = "";
     var weatherURL;
 
     if (city != "") {
-        // add ajax query for city search and set lat and long var from ajax response
-        // Performing GET requests to the openweather API and logging the responses to the console
+        // Performing GET requests to the openweather API 
         weatherURL = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=imperial&APPID=" + appID
     } else if (zip != "") {
-        // add ajax query for zip search and set lat and long var from ajax response
        weatherURL = "https://api.openweathermap.org/data/2.5/weather?zip=" + zip + "&units=imperial&APPID=" + appID
     } else {
         lat = latLong[0];
@@ -74,6 +103,7 @@ function getWeather(city, zip, latLong) {
 
     console.log(weatherURL);
 
+    //  Pulling information from ajax call to set into Main Weather Area
     $.getJSON(weatherURL, function (json) {
         $("#city").html(json.name);
         $("#main_weather").html(json.weather[0].main);
@@ -84,16 +114,19 @@ function getWeather(city, zip, latLong) {
         $("#humidity").html(json.main.humidity);
         $("#windspd").html(json.wind.speed);
                 
-        long = json.coord.lon;
-        lat = json.coord.lat;
+        /* This was to get the UV Index but was unable to keep API key working */
+        //long = json.coord.lon;
+        //lat = json.coord.lat;
+        //getUVindex(long, lat, appID);
 
-        getUVindex(long, lat, appID);
-        searchHistoryAdd(json.name);
+        //add our city to the search history list
+        searchHistoryAdd(json.name, true);
     });
 }
 
+        // UV index from openUV.io however could Not keep functioning key code.
 function getUVindex(long, lat) {
-    var appID = "d0002c08f39abfdc3b22ec60f51c0b4e";
+    var appID = "";
     // add ajax query for UV index from api.openuv.io code found on OpenUV API key auth.
     var UVindexURl = "https://api.openuv.io/api/v1/uv?lat=" + lat + "&lng=" + long;
 

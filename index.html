@@ -19,16 +19,17 @@
 </head>
 
 <body>
-
-    <div class="alert alert-primary pb-5 text-center" role="alert" id="topHeader">
+    <header class="topHeader"></header>
+<!-- Header at top of the page  -->
+    <div class="alert alert-alert-light pb-5 text-center" role="alert" id="topHeader">
         <h1>Weather Board</h1>
         <h6>Enter your city or zip to retrieve your weather information</h6>
-        <h6>Searches will be saved under the city and zip inputs</h6>
     </div>
+    <!-- Search Area with City and Zip -->
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-2 col-lg-offset-2 text-center">
-                <span class="border-3 p-3">
+                <span class="border-3 p-3 bg-light">
                     <div class="row px-2 pb-2">
                             <div class="input-group input-group-sm mb-3">
                                 <input type="text" placeholder="City" class="form-control" id="citySearch">
@@ -45,6 +46,7 @@
                                 </div>
                             </div>
                     </div>
+            <!-- Search Area History -->
                     <div class="row">
                         <table class="table" id="tabHistory">
                             <tbody></tbody>
@@ -52,17 +54,19 @@
                     </div>
                 </span>
             </div>
+            <!-- Main Weather Area showing daily details -->
             <div class="col-lg-10">
-                <div class="row pb-4">
+                <div class="row pb-4 justify-content-center">
+                    <div class="col-lg-3"></div>
                     <div class="col-lg-8">
-                        <span class="border-3 p-3">
+                        <span class="border-3 p-3 bg-light">
                             <h2>City: <span id="city"></span></h2>
                             <h2>Main Weather: <span id="main_weather"></span></h2>
                             <h2>Description: <span id="description_weather"></span></h2>
                             <img id="weather_image" src="">
                             <h2>Temperature: <span id="temperature"></span></h2>
-                            <button id="convertToCelsius" class="btn btn-primary btn-sm">Convert to Celsius</button>
-                            <button id="convertToFahrenheit" class="btn btn-primary btn-sm">Convert to FahrenHeit</button>
+                            <button id="convertToCelsius" class="btn btn-success btn-sm">Convert to Celsius</button>
+                            <button id="convertToFahrenheit" class="btn btn-success btn-sm">Convert to FahrenHeit</button>
                             <h2>Pressure: <span id="pressure"></span></h2>
                             <h2>Humidity: <span id="humidity"></span></h2>
                             <h2>Wind Speed: <span id="windspd"></span></h2>
@@ -70,14 +74,20 @@
                         </span>
                     </div>
                 </div>
+        <!--  Weather Widget with 5 day forecast -->
                 <div class="row">
-                    
+                    <div class="col-lg-10">
+                        <a class="weatherwidget-io" href="https://forecast7.com/en/39d29n76d61/baltimore/?unit=us" 
+                        data-label_1="BALTIMORE" data-label_2="Forecast" data-icons="Climacons Animated" data-mode="Forecast" 
+                        data-days="5" data-theme="clear" >BALTIMORE Forecast</a> 
+                    </div>   
                 </div>
             </div>
         </div>
     </div>
 
     <script src="./assets/js/weather.js"></script>
+    <script src="./assets/js/anime.js"></script>
 </body>
 
 </html>
