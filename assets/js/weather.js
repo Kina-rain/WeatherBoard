@@ -62,11 +62,13 @@ function storeLocations(searchLocation) {
 
 //  Pulls data out of storage 
 function loadLocations() {
-    var weatherData = JSON.parse(localStorage.getItem("locationData"));
+    if (localStorage.getItem("locationData") != null) {
+        var weatherData = JSON.parse(localStorage.getItem("locationData"));
 
-    weatherData.location.forEach(weatherLocation => {
+        weatherData.location.forEach(weatherLocation => {
         searchHistoryAdd(weatherLocation, false)        
     });
+    }
 }
 
 // tutorialzine.com for weather forecast, works with geolocation call
