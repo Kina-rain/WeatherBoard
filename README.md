@@ -14,7 +14,7 @@ locations. I also added a 5 day weather forecast for Baltimore. A UV index was a
 
 ![alt text][screenshot]
 
-[screenshot]
+[screenshot]: https://github.com/Kina-rain/WeatherBoard/blob/master/assets/images/WeatherScreenShot.png "Weather Project"
 
 
 
