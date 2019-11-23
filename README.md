@@ -8,18 +8,13 @@ locations. I also added a 5 day weather forecast for Baltimore. A UV index was a
 
 ## Screen Shot
 
-*Link
+*Link: https://github.com/Kina-rain/WeatherBoard
 
-*Link
+*Link: https://kina-rain.github.io/WeatherBoard/
 
 ![alt text][screenshot]
 
 [screenshot]: https://github.com/Kina-rain/WeatherBoard/blob/master/assets/images/WeatherScreenShot.png "Weather Project"
-
-
-
-
-
 
 ### References
 
@@ -38,5 +33,7 @@ stackoverflow.com
 developer.mozilla.org
 
 w3schools.com
+
+code.likeagirl.io
 
 A tutor help with this assignment.
